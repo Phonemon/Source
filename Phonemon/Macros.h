@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include "Constants.h"
+
 //Used to print some text on screen
 #define DEBUG(x) \
 	#if _DEBUG_\
