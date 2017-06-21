@@ -6,6 +6,6 @@
 
 
 UENUM()
-enum class EMonsterType : uint 8 {
+enum class EMonsterType : uint8 {
     TYPE_NORMAL
 };
