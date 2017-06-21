@@ -36,6 +36,8 @@ protected:
    int32 m_Agility;
    int32 m_Cleverness;
 
+   EMonsterType m_Type;
+
    
 	
 };
