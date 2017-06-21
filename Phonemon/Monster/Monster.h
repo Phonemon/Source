@@ -30,5 +30,12 @@ public:
 protected:
 	int32 m_MaxHp;
 	int32 m_Hp;
+
+   int32 m_Strength;
+   int32 m_Vitality;
+   int32 m_Agility;
+   int32 m_Cleverness;
+
+   
 	
 };
