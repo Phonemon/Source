@@ -9,11 +9,22 @@ AMainCharacter::AMainCharacter() {
  	// Set this character to call Tick() every frame. 
 	PrimaryActorTick.bCanEverTick = true;
 
+	//Set default var
+	m_Movement = EMovement::MOVEMENT_NONE;
+
 }
 
 // Called when the game starts or when spawned
 void AMainCharacter::BeginPlay() {
 	Super::BeginPlay();
+
+	UWorld* World = GetWorld();
+
+	if (World) {
+		FTimerHandle t;
+		World->GetTimerManager().SetTimer(t, this, &AMainCharacter::processMovement, 0.2f, true);
+		DEBUG("Set timer");
+	}
 	
 }
 
@@ -23,39 +34,60 @@ void AMainCharacter::Tick(float DeltaTime) {
 
 }
 
-// Move forward
-void AMainCharacter::MoveForward(float Value) {
-	if ((Controller != NULL) && (Value != 0.0f)) {
-		// find out which way is forward
-		FRotator Rotation = GetController()->GetControlRotation();
-		// Limit pitch when walking or falling
-		if (GetCharacterMovement()->IsMovingOnGround() || GetCharacterMovement()->IsFalling()) {
-			Rotation.Pitch = 0.0f;
+//Move the character
+void AMainCharacter::processMovement() {
+	if (m_Movement != EMovement::MOVEMENT_NONE) {
+		FVector Orientation;
+		switch (m_Movement) {
+		case EMovement::MOVEMENT_UP:    Orientation.X = 1.f; break;
+		case EMovement::MOVEMENT_DOWN:  Orientation.X = -1.f; break;
+		case EMovement::MOVEMENT_RIGHT: Orientation.Y = 1.f; break;
+		case EMovement::MOVEMENT_LEFT:  Orientation.Y = -1.f; break;
 		}
-		// add movement in that direction
-		const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::X);
-		AddMovementInput(Direction, Value);
+		AddMovementInput(Orientation, 1.f);
+		DEBUG("MOVEMENT PROCESSED");
 	}
 }
 
-// Move right
-void AMainCharacter::MoveRight(float Value) {
-	if ((Controller != NULL) && (Value != 0.0f)) {
-		// find out which way is forward
-		FRotator Rotation = GetController()->GetControlRotation();
-		// add movement in that direction
-		const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::X);
-		AddMovementInput(Direction, Value);
-	}
+// Move forward
+void AMainCharacter::startMoveForward() {
+	m_Movement = EMovement::MOVEMENT_UP;
 }
+
+// Move right
+void AMainCharacter::startMoveRight() {
+	m_Movement = EMovement::MOVEMENT_RIGHT;
+}
+
+// Move backward
+void AMainCharacter::startMoveBackward() {
+	m_Movement = EMovement::MOVEMENT_DOWN;
+}
+
+// Move left
+void AMainCharacter::startMoveLeft() {
+	m_Movement = EMovement::MOVEMENT_LEFT;
+}
+
+// Stop movement
+void AMainCharacter::endMove() {
+	m_Movement = EMovement::MOVEMENT_NONE;
+}
+
 
 // Called to bind functionality to input
 void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 	//Bind movements
-	PlayerInputComponent->BindAxis("MoveForward", this, &AMainCharacter::MoveForward);
-	PlayerInputComponent->BindAxis("MoveRight",   this, &AMainCharacter::MoveRight);
+	PlayerInputComponent->BindAction("MoveForward",  IE_Pressed,  this, &AMainCharacter::startMoveForward);
+	PlayerInputComponent->BindAction("MoveForward",  IE_Released, this, &AMainCharacter::endMove);
+	PlayerInputComponent->BindAction("MoveRight",    IE_Pressed,  this, &AMainCharacter::startMoveRight);
+	PlayerInputComponent->BindAction("MoveRight",    IE_Released, this, &AMainCharacter::endMove);
+	PlayerInputComponent->BindAction("MoveBackward", IE_Pressed,  this, &AMainCharacter::startMoveBackward);
+	PlayerInputComponent->BindAction("MoveBackward", IE_Released, this, &AMainCharacter::endMove);
+	PlayerInputComponent->BindAction("MoveLeft",     IE_Pressed,  this, &AMainCharacter::startMoveLeft);
+	PlayerInputComponent->BindAction("MoveLeft",     IE_Released, this, &AMainCharacter::endMove);
 
 }
 

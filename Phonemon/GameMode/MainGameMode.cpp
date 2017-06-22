@@ -5,6 +5,10 @@
 
 //Constructor
 AMainGameMode::AMainGameMode() {
-	DefaultPawnClass = AMainCharacter::StaticClass();
-
+	
+	// Set default pawn class to our Blueprinted character
+	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnObject(TEXT("Pawn'/Game/Character/MainCharacterBp.MainCharacterBp_C'"));
+	if (PlayerPawnObject.Class != NULL) {
+		DefaultPawnClass = PlayerPawnObject.Class;
+	}
 }

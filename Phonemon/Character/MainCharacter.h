@@ -24,15 +24,33 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+private:
+
+	// Process movement
+	UFUNCTION()
+	void processMovement();
+
+	// Stop movement
+	UFUNCTION()
+	void endMove();
 
 	// Move forward
 	UFUNCTION()
-	void MoveForward(float Value);
+	void startMoveForward();
 
 	// Move right
 	UFUNCTION()
-	void MoveRight(float Value);
+	void startMoveRight();
+
+	// Move backward
+	UFUNCTION()
+	void startMoveBackward();
+
+	// Move left
+	UFUNCTION()
+	void startMoveLeft();
+
+public:	
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -46,6 +64,9 @@ public:
 private:
 	// Monsters
 	TArray<AMonster*> m_Monsters;
+
+	// Movement
+	EMovement m_Movement;
 
 	
 	

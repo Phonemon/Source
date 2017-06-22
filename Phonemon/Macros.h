@@ -5,4 +5,4 @@
 #pragma once
 
 //Used to print some text on screen
-#define DEBUG(x) if (GEngine) GEngine->AddOnScreenDebugMessage(MyNumberKey, 5.f, FColor::Red, TEXT(x)); 
+#define DEBUG(x) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT(x)); 
