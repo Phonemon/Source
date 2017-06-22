@@ -5,23 +5,20 @@
 #include "../Monster/Monster.h"
 
 // Sets default values
-AMainCharacter::AMainCharacter()
-{
+AMainCharacter::AMainCharacter() {
  	// Set this character to call Tick() every frame. 
 	PrimaryActorTick.bCanEverTick = true;
 
 }
 
 // Called when the game starts or when spawned
-void AMainCharacter::BeginPlay()
-{
+void AMainCharacter::BeginPlay() {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void AMainCharacter::Tick(float DeltaTime)
-{
+void AMainCharacter::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
 
 }
