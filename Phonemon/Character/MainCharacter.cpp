@@ -22,8 +22,7 @@ void AMainCharacter::BeginPlay() {
 
 	if (World) {
 		FTimerHandle t;
-		World->GetTimerManager().SetTimer(t, this, &AMainCharacter::processMovement, 0.2f, true);
-		DEBUG("Set timer");
+		World->GetTimerManager().SetTimer(t, this, &AMainCharacter::processMovement, 0.4f, true);
 	}
 	
 }
@@ -36,42 +35,59 @@ void AMainCharacter::Tick(float DeltaTime) {
 
 //Move the character
 void AMainCharacter::processMovement() {
-	if (m_Movement != EMovement::MOVEMENT_NONE) {
-		FVector Orientation;
-		switch (m_Movement) {
-		case EMovement::MOVEMENT_UP:    Orientation.X = 1.f; break;
-		case EMovement::MOVEMENT_DOWN:  Orientation.X = -1.f; break;
-		case EMovement::MOVEMENT_RIGHT: Orientation.Y = 1.f; break;
-		case EMovement::MOVEMENT_LEFT:  Orientation.Y = -1.f; break;
+	for (int i = 0; i < 4; ++i) {
+		if (keyPressed[i]) {
+
 		}
-		AddMovementInput(Orientation, 1.f);
-		DEBUG("MOVEMENT PROCESSED");
 	}
 }
 
 // Move forward
 void AMainCharacter::startMoveForward() {
 	m_Movement = EMovement::MOVEMENT_UP;
+	keyPressed[EDirection::DIRECTION_UP] = true;
 }
 
 // Move right
 void AMainCharacter::startMoveRight() {
 	m_Movement = EMovement::MOVEMENT_RIGHT;
+	keyPressed[EDirection::DIRECTION_RIGHT] = true;
 }
 
 // Move backward
 void AMainCharacter::startMoveBackward() {
 	m_Movement = EMovement::MOVEMENT_DOWN;
+	keyPressed[EDirection::DIRECTION_DOWN] = true;
 }
 
 // Move left
 void AMainCharacter::startMoveLeft() {
 	m_Movement = EMovement::MOVEMENT_LEFT;
+	keyPressed[EDirection::DIRECTION_LEFT] = true;
 }
 
 // Stop movement
-void AMainCharacter::endMove() {
+void AMainCharacter::endMoveForward() {
 	m_Movement = EMovement::MOVEMENT_NONE;
+	keyPressed[EDirection::DIRECTION_UP] = false;
+}
+
+// Stop movement
+void AMainCharacter::endMoveBackward() {
+	m_Movement = EMovement::MOVEMENT_NONE;
+	keyPressed[EDirection::DIRECTION_DOWN] = false;
+}
+
+// Stop movement
+void AMainCharacter::endMoveRight() {
+	m_Movement = EMovement::MOVEMENT_NONE;
+	keyPressed[EDirection::DIRECTION_RIGHT] = false;
+}
+
+// Stop movement
+void AMainCharacter::endMoveLeft() {
+	m_Movement = EMovement::MOVEMENT_NONE;
+	keyPressed[EDirection::DIRECTION_LEFT] = false;
 }
 
 
@@ -81,13 +97,13 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	//Bind movements
 	PlayerInputComponent->BindAction("MoveForward",  IE_Pressed,  this, &AMainCharacter::startMoveForward);
-	PlayerInputComponent->BindAction("MoveForward",  IE_Released, this, &AMainCharacter::endMove);
+	PlayerInputComponent->BindAction("MoveForward",  IE_Released, this, &AMainCharacter::endMoveForward);
 	PlayerInputComponent->BindAction("MoveRight",    IE_Pressed,  this, &AMainCharacter::startMoveRight);
-	PlayerInputComponent->BindAction("MoveRight",    IE_Released, this, &AMainCharacter::endMove);
+	PlayerInputComponent->BindAction("MoveRight",    IE_Released, this, &AMainCharacter::endMoveRight);
 	PlayerInputComponent->BindAction("MoveBackward", IE_Pressed,  this, &AMainCharacter::startMoveBackward);
-	PlayerInputComponent->BindAction("MoveBackward", IE_Released, this, &AMainCharacter::endMove);
+	PlayerInputComponent->BindAction("MoveBackward", IE_Released, this, &AMainCharacter::endMoveBackward);
 	PlayerInputComponent->BindAction("MoveLeft",     IE_Pressed,  this, &AMainCharacter::startMoveLeft);
-	PlayerInputComponent->BindAction("MoveLeft",     IE_Released, this, &AMainCharacter::endMove);
+	PlayerInputComponent->BindAction("MoveLeft",     IE_Released, this, &AMainCharacter::endMoveLeft);
 
 }
 

@@ -18,3 +18,12 @@ enum class EMovement : uint8 {
 	MOVEMENT_RIGHT,
 	MOVEMENT_LEFT
 };
+
+UENUM(BlueprintType)
+enum class EDirection : uint8 {
+	DIRECTION_UP,
+	DIRECTION_DOWN,
+	DIRECTION_RIGHT,
+	DIRECTION_LEFT,
+	DIRECTION_NONE
+};

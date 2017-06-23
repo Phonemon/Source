@@ -32,7 +32,19 @@ private:
 
 	// Stop movement
 	UFUNCTION()
-	void endMove();
+		void endMoveForward();
+
+	// Stop movement
+	UFUNCTION()
+		void endMoveBackward();
+
+	// Stop movement
+	UFUNCTION()
+		void endMoveLeft();
+
+	// Stop movement
+	UFUNCTION()
+		void endMoveRight();
 
 	// Move forward
 	UFUNCTION()
@@ -67,6 +79,9 @@ private:
 
 	// Movement
 	EMovement m_Movement;
+
+	// Movement
+	bool keyPressed[4];
 
 	
 	
