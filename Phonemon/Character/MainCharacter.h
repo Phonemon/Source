@@ -25,26 +25,22 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-
-	// Process movement
+	
+	// Stop movement
 	UFUNCTION()
-	void processMovement();
+	void endMoveForward();
 
 	// Stop movement
 	UFUNCTION()
-		void endMoveForward();
+	void endMoveBackward();
 
 	// Stop movement
 	UFUNCTION()
-		void endMoveBackward();
+	void endMoveLeft();
 
 	// Stop movement
 	UFUNCTION()
-		void endMoveLeft();
-
-	// Stop movement
-	UFUNCTION()
-		void endMoveRight();
+	void endMoveRight();
 
 	// Move forward
 	UFUNCTION()
@@ -78,10 +74,10 @@ private:
 	TArray<AMonster*> m_Monsters;
 
 	// Movement
-	EMovement m_Movement;
-
-	// Movement
 	bool keyPressed[4];
+
+	// Movement timer
+	FTimerHandle m_Timer;
 
 	
 	

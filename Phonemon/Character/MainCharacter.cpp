@@ -10,7 +10,8 @@ AMainCharacter::AMainCharacter() {
 	PrimaryActorTick.bCanEverTick = true;
 
 	//Set default var
-	m_Movement = EMovement::MOVEMENT_NONE;
+	for (int32 i = 0; i < 4; ++i)
+		keyPressed[i] = false;
 
 }
 
@@ -18,13 +19,6 @@ AMainCharacter::AMainCharacter() {
 void AMainCharacter::BeginPlay() {
 	Super::BeginPlay();
 
-	UWorld* World = GetWorld();
-
-	if (World) {
-		FTimerHandle t;
-		World->GetTimerManager().SetTimer(t, this, &AMainCharacter::processMovement, 0.4f, true);
-	}
-	
 }
 
 // Called every frame
@@ -33,61 +27,44 @@ void AMainCharacter::Tick(float DeltaTime) {
 
 }
 
-//Move the character
-void AMainCharacter::processMovement() {
-	for (int i = 0; i < 4; ++i) {
-		if (keyPressed[i]) {
-
-		}
-	}
-}
-
 // Move forward
 void AMainCharacter::startMoveForward() {
-	m_Movement = EMovement::MOVEMENT_UP;
-	keyPressed[EDirection::DIRECTION_UP] = true;
+	keyPressed[static_cast<int32>(EDirection::DIRECTION_UP)] = true;
 }
 
 // Move right
 void AMainCharacter::startMoveRight() {
-	m_Movement = EMovement::MOVEMENT_RIGHT;
-	keyPressed[EDirection::DIRECTION_RIGHT] = true;
+	keyPressed[static_cast<int32>(EDirection::DIRECTION_RIGHT)] = true;
 }
 
 // Move backward
 void AMainCharacter::startMoveBackward() {
-	m_Movement = EMovement::MOVEMENT_DOWN;
-	keyPressed[EDirection::DIRECTION_DOWN] = true;
+	keyPressed[static_cast<int32>(EDirection::DIRECTION_DOWN)] = true;
 }
 
 // Move left
 void AMainCharacter::startMoveLeft() {
-	m_Movement = EMovement::MOVEMENT_LEFT;
-	keyPressed[EDirection::DIRECTION_LEFT] = true;
+	keyPressed[static_cast<int32>(EDirection::DIRECTION_LEFT)] = true;
 }
 
 // Stop movement
 void AMainCharacter::endMoveForward() {
-	m_Movement = EMovement::MOVEMENT_NONE;
-	keyPressed[EDirection::DIRECTION_UP] = false;
+	keyPressed[static_cast<int32>(EDirection::DIRECTION_UP)] = false;
 }
 
 // Stop movement
 void AMainCharacter::endMoveBackward() {
-	m_Movement = EMovement::MOVEMENT_NONE;
-	keyPressed[EDirection::DIRECTION_DOWN] = false;
+	keyPressed[static_cast<int32>(EDirection::DIRECTION_DOWN)] = false;
 }
 
 // Stop movement
 void AMainCharacter::endMoveRight() {
-	m_Movement = EMovement::MOVEMENT_NONE;
-	keyPressed[EDirection::DIRECTION_RIGHT] = false;
+	keyPressed[static_cast<int32>(EDirection::DIRECTION_RIGHT)] = false;
 }
 
 // Stop movement
 void AMainCharacter::endMoveLeft() {
-	m_Movement = EMovement::MOVEMENT_NONE;
-	keyPressed[EDirection::DIRECTION_LEFT] = false;
+	keyPressed[static_cast<int32>(EDirection::DIRECTION_LEFT)] = false;
 }
 
 
