@@ -9,9 +9,9 @@ AMainCharacter::AMainCharacter() {
  	// Set this character to call Tick() every frame. 
 	PrimaryActorTick.bCanEverTick = true;
 
-	//Set default var
-	for (int32 i = 0; i < 4; ++i)
-		keyPressed[i] = false;
+
+	m_isRunning = false;
+	m_isOnBike = false;
 
 }
 
@@ -34,59 +34,38 @@ bool AMainCharacter::equipBike(){
 }
 
 // Move forward
-void AMainCharacter::startMoveForward() {
-	keyPressed[static_cast<int32>(EDirection::DIRECTION_UP)] = true;
+void AMainCharacter::MoveForward(float Value) {
+	if ((Controller != NULL) && (Value != 0.0f))	{
+		// find out which way is forward
+		FRotator Rotation = Controller->GetControlRotation();
+		// Limit pitch when walking or falling
+		if (GetCharacterMovement()->IsMovingOnGround() || GetCharacterMovement()->IsFalling()){
+			Rotation.Pitch = 0.0f;
+		}
+		// add movement in that direction
+		const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::X);
+		AddMovementInput(Direction, Value);
+	}
 }
 
 // Move right
-void AMainCharacter::startMoveRight() {
-	keyPressed[static_cast<int32>(EDirection::DIRECTION_RIGHT)] = true;
+void AMainCharacter::MoveRight(float Value) {
+	if ((Controller != NULL) && (Value != 0.0f)) {
+		// find out which way is right
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FVector Direction = FRotationMatrix(Rotation).GetScaledAxis(EAxis::Y);
+		// add movement in that direction
+		AddMovementInput(Direction, Value);
+	}
 }
-
-// Move backward
-void AMainCharacter::startMoveBackward() {
-	keyPressed[static_cast<int32>(EDirection::DIRECTION_DOWN)] = true;
-}
-
-// Move left
-void AMainCharacter::startMoveLeft() {
-	keyPressed[static_cast<int32>(EDirection::DIRECTION_LEFT)] = true;
-}
-
-// Stop movement
-void AMainCharacter::endMoveForward() {
-	keyPressed[static_cast<int32>(EDirection::DIRECTION_UP)] = false;
-}
-
-// Stop movement
-void AMainCharacter::endMoveBackward() {
-	keyPressed[static_cast<int32>(EDirection::DIRECTION_DOWN)] = false;
-}
-
-// Stop movement
-void AMainCharacter::endMoveRight() {
-	keyPressed[static_cast<int32>(EDirection::DIRECTION_RIGHT)] = false;
-}
-
-// Stop movement
-void AMainCharacter::endMoveLeft() {
-	keyPressed[static_cast<int32>(EDirection::DIRECTION_LEFT)] = false;
-}
-
 
 // Called to bind functionality to input
 void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	//Bind movements
-	PlayerInputComponent->BindAction("MoveForward",  IE_Pressed,  this, &AMainCharacter::startMoveForward);
-	PlayerInputComponent->BindAction("MoveForward",  IE_Released, this, &AMainCharacter::endMoveForward);
-	PlayerInputComponent->BindAction("MoveRight",    IE_Pressed,  this, &AMainCharacter::startMoveRight);
-	PlayerInputComponent->BindAction("MoveRight",    IE_Released, this, &AMainCharacter::endMoveRight);
-	PlayerInputComponent->BindAction("MoveBackward", IE_Pressed,  this, &AMainCharacter::startMoveBackward);
-	PlayerInputComponent->BindAction("MoveBackward", IE_Released, this, &AMainCharacter::endMoveBackward);
-	PlayerInputComponent->BindAction("MoveLeft",     IE_Pressed,  this, &AMainCharacter::startMoveLeft);
-	PlayerInputComponent->BindAction("MoveLeft",     IE_Released, this, &AMainCharacter::endMoveLeft);
+	//Bind Axis
+	PlayerInputComponent->BindAxis("MoveForward", this, &AMainCharacter::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight",   this, &AMainCharacter::MoveRight);
 
 }
 

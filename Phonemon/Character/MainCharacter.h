@@ -6,6 +6,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Runtime/Engine/Classes/GameFramework/Controller.h"
 #include "../Include.h"
+#include "../Libs/LIB_Bp.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "MainCharacter.generated.h"
@@ -25,38 +26,11 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	
-	// Stop movement
 	UFUNCTION()
-	void endMoveForward();
+	void MoveForward(float Value);
 
-	// Stop movement
 	UFUNCTION()
-	void endMoveBackward();
-
-	// Stop movement
-	UFUNCTION()
-	void endMoveLeft();
-
-	// Stop movement
-	UFUNCTION()
-	void endMoveRight();
-
-	// Move forward
-	UFUNCTION()
-	void startMoveForward();
-
-	// Move right
-	UFUNCTION()
-	void startMoveRight();
-
-	// Move backward
-	UFUNCTION()
-	void startMoveBackward();
-
-	// Move left
-	UFUNCTION()
-	void startMoveLeft();
+	void MoveRight(float Value);
 
 public:	
 
@@ -76,12 +50,6 @@ public:
 private:
 	// Monsters
 	TArray<AMonster*> m_Monsters;
-
-	// Movement
-	bool keyPressed[4];
-
-	// Movement timer
-	FTimerHandle m_Timer;
 
 	// Running
    bool m_isRunning;
