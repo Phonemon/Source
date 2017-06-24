@@ -27,6 +27,12 @@ void AMainCharacter::Tick(float DeltaTime) {
 
 }
 
+// Equip / unequip the bike
+bool AMainCharacter::equipBike(){
+    m_isOnBike = !m_isOnBike;
+    return m_isOnBike;
+}
+
 // Move forward
 void AMainCharacter::startMoveForward() {
 	keyPressed[static_cast<int32>(EDirection::DIRECTION_UP)] = true;
