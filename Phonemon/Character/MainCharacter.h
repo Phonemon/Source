@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// 
 
 #pragma once
 
@@ -79,6 +79,10 @@ private:
 	// Movement timer
 	FTimerHandle m_Timer;
 
-	
+	// Running
+   bool m_isRunning;
+
+   // Bike
+   bool m_isOnBike;
 	
 };
