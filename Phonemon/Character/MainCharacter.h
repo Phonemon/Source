@@ -69,6 +69,10 @@ public:
 	UFUNCTION()
 	bool addMonster(AMonster* Monster);
 
+    // Equip the bike
+    UFUNCTION()
+    bool equipBike();
+
 private:
 	// Monsters
 	TArray<AMonster*> m_Monsters;
