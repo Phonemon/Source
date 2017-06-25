@@ -28,16 +28,16 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
+	UPROPERTY(BlueprintReadOnly)
 	int32 m_MaxHp;
+	UPROPERTY(BlueprintReadOnly)
 	int32 m_Hp;
 
-   int32 m_Strength;
-   int32 m_Vitality;
-   int32 m_Agility;
-   int32 m_Cleverness;
+	int32 m_Strength;
+	int32 m_Vitality;
+	int32 m_Agility;
+	int32 m_Cleverness;
 
-   EMonsterType m_Type;
-
-   
+	EMonsterType m_Type;   
 	
 };

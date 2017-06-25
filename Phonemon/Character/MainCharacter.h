@@ -26,11 +26,17 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void MoveForward(float Value);
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void MoveRight(float Value);
+
+	UFUNCTION()
+	void processMovement();
+
+	//UFUNCTION()
+	void SetActorRotation(const EDirection Dir);
 
 public:	
 
@@ -45,11 +51,19 @@ public:
 
     // Equip the bike
     UFUNCTION()
-    bool equipBike();
+    void equipBike();
 
-private:
+	UFUNCTION()
+	void run();
+
+protected:
 	// Monsters
 	TArray<AMonster*> m_Monsters;
+
+	// Movement
+	bool m_isMoving;
+	FVector m_NextLocation;
+	FTimerHandle m_MovementTimer;
 
 	// Running
    bool m_isRunning;

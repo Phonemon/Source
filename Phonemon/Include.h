@@ -4,7 +4,7 @@
 
 #pragma once
 
+#include "Macros.h"
 #include "Constants.h"
 #include "Enums.h"
 #include "Structs.h"
-#include "Macros.h"
