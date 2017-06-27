@@ -9,3 +9,11 @@ UMonsterEntity::UMonsterEntity() {
 UMonsterEntity::~UMonsterEntity() {
 
 }
+
+// Serialize this monster to string
+FString UMonsterEntity::serialize() {
+    FString ser;
+
+    
+    return ser;
+}
