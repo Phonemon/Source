@@ -11,6 +11,8 @@
 #include "GameFramework/Character.h"
 #include "MainCharacter.generated.h"
 
+
+class UMonsterEntity;
 class AMonster;
 
 UCLASS(Blueprintable)
@@ -47,7 +49,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION()
-	bool addMonster(AMonster* Monster);
+	bool addMonster(UMonsterEntity* Monster);
 
     // Equip the bike
     UFUNCTION(BlueprintCallable)
@@ -59,7 +61,7 @@ public:
 protected:
 	// Monsters
 	UPROPERTY(BlueprintReadOnly)
-	TArray<AMonster*> m_Monsters;
+	TArray<UMonsterEntity*> m_Monsters;
 
 	// Movement
 	UPROPERTY(BlueprintReadOnly)

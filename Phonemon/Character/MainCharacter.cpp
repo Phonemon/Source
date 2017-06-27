@@ -3,6 +3,7 @@
 
 #include "MainCharacter.h"
 #include "../Monster/Monster.h"
+#include "../Monster/MonsterEntity.h"
 
 // Sets default values
 AMainCharacter::AMainCharacter() {
@@ -216,7 +217,7 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 }
 
 // Add a monster to this character
-bool AMainCharacter::addMonster(AMonster* Monster) {
+bool AMainCharacter::addMonster(UMonsterEntity* Monster) {
 	if (m_Monsters.Num() >= MAX_MONSTERS)
 		return false;
 

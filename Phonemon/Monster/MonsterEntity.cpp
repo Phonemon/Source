@@ -2,10 +2,10 @@
 
 #include "MonsterEntity.h"
 
-MonsterEntity::MonsterEntity()
-{
+UMonsterEntity::UMonsterEntity() {
+
 }
 
-MonsterEntity::~MonsterEntity()
-{
+UMonsterEntity::~UMonsterEntity() {
+
 }
