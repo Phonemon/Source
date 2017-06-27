@@ -19,6 +19,8 @@ public:
 	UMonsterEntity();
 	~UMonsterEntity();
 
+    void serialize();
+
 protected:
 	// Name
 	FName m_Name;
