@@ -19,7 +19,7 @@ public:
 	UMonsterEntity();
 	~UMonsterEntity();
 
-    void serialize();
+    FString serialize();
 
 protected:
 	// Name
