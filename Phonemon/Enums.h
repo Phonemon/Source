@@ -9,7 +9,8 @@ UENUM(BlueprintType)
 enum class EMonsterType : uint8 {
 	TYPE_NORMAL,
     TYPE_FIRE,
-    TYPE_WATER
+    TYPE_WATER,
+    TYPE_GRASS
 };
 
 UENUM(BlueprintType)
