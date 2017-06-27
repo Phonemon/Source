@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "../Experience/Experience.h"
 #include "../Include.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
@@ -28,6 +29,10 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
+	// Exp
+	Experience m_Experience;
+
+	// Stats
 	UPROPERTY(BlueprintReadOnly)
 	int32 m_MaxHp;
 	UPROPERTY(BlueprintReadOnly)

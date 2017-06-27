@@ -13,6 +13,6 @@
 
 // Character
 #define WALK_SPEED		SPEED(5)
-#define RUN_SPEED		SPEED(8)
+#define RUN_SPEED		SPEED(10)
 #define BIKE_SPEED		SPEED(15)
 #define MAX_MONSTERS	6

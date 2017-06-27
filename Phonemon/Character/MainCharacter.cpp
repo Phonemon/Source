@@ -68,36 +68,29 @@ void AMainCharacter::processMovement() {
 		float mY = Location.Y - m_NextLocation.Y;
 		mY *= -1;
 
-		// Get the speed
-		float Speed = WALK_SPEED;
-		if (m_isRunning)
-			Speed = RUN_SPEED;
-		else if (m_isOnBike)
-			Speed = BIKE_SPEED;
-
 		// Rotate the character in the orientation of the movement
 		// Get a partial path to the location
 		if (mX > 1) {
 			SetActorRotation(EDirection::DIRECTION_UP);
-			Location.X += TILE_SIZE * Speed;
+			Location.X += TILE_SIZE * m_Speed;
 			if (Location.X > m_NextLocation.X)
 				Location.X = m_NextLocation.X;
 		}
 		else if (mX < -1) {
 			SetActorRotation(EDirection::DIRECTION_DOWN);
-			Location.X -= TILE_SIZE * Speed;
+			Location.X -= TILE_SIZE * m_Speed;
 			if (Location.X < m_NextLocation.X)
 				Location.X = m_NextLocation.X;
 		}
 		if (mY > 1) {
 			SetActorRotation(EDirection::DIRECTION_RIGHT);
-			Location.Y += TILE_SIZE * Speed;
+			Location.Y += TILE_SIZE * m_Speed;
 			if (Location.Y > m_NextLocation.Y)
 				Location.Y = m_NextLocation.Y;
 		}
 		else if (mY < -1) {
 			SetActorRotation(EDirection::DIRECTION_LEFT);
-			Location.Y -= TILE_SIZE * Speed;
+			Location.Y -= TILE_SIZE * m_Speed;
 			if (Location.Y < m_NextLocation.Y)
 				Location.Y = m_NextLocation.Y;
 		}
@@ -125,12 +118,13 @@ void AMainCharacter::processMovement() {
 
 // Equip / unequip the bike
 void AMainCharacter::equipBike(){
-    m_isOnBike = !m_isOnBike;
+		m_isOnBike = !m_isOnBike;
 }
 
 // Run / not run
-void AMainCharacter::run() {
-	m_isRunning = !m_isRunning;
+void AMainCharacter::run(float Val) {
+	if (Val <= 0.9f)
+		m_isRunning = Val >= .9f;
 }
 
 // Move forward - backward
@@ -156,6 +150,14 @@ void AMainCharacter::MoveForward(float Value) {
 		
 		// Set the location we want to reach
 		m_NextLocation = NextLocation;
+
+		// Set the speed
+		if (m_isOnBike)
+			m_Speed = BIKE_SPEED;
+		else if (m_isRunning)
+			m_Speed = RUN_SPEED;
+		else
+			m_Speed = WALK_SPEED;
 
 		processMovement();
 		
@@ -186,6 +188,14 @@ void AMainCharacter::MoveRight(float Value) {
 		// Set the location we want to reach
 		m_NextLocation = NextLocation;
 
+		// Set the speed
+		if (m_isOnBike)
+			m_Speed = BIKE_SPEED;
+		else if (m_isRunning)
+			m_Speed = RUN_SPEED;
+		else
+			m_Speed = WALK_SPEED;
+
 		processMovement();
 	}
 }
@@ -197,10 +207,9 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	//Bind Axis
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMainCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight",   this, &AMainCharacter::MoveRight);
+	PlayerInputComponent->BindAxis("Run",		  this, &AMainCharacter::run);
 
 	//Bind actions
-	PlayerInputComponent->BindAction("Run",		  IE_Pressed,  this, &AMainCharacter::run);
-	PlayerInputComponent->BindAction("Run",		  IE_Released, this, &AMainCharacter::run);
 	PlayerInputComponent->BindAction("EquipBike", IE_Pressed,  this, &AMainCharacter::equipBike);
 
 

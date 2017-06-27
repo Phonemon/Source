@@ -50,25 +50,31 @@ public:
 	bool addMonster(AMonster* Monster);
 
     // Equip the bike
-    UFUNCTION()
+    UFUNCTION(BlueprintCallable)
     void equipBike();
 
-	UFUNCTION()
-	void run();
+	UFUNCTION(BlueprintCallable)
+	void run(float Val);
 
 protected:
 	// Monsters
+	UPROPERTY(BlueprintReadOnly)
 	TArray<AMonster*> m_Monsters;
 
 	// Movement
+	UPROPERTY(BlueprintReadOnly)
 	bool m_isMoving;
 	FVector m_NextLocation;
 	FTimerHandle m_MovementTimer;
+	UPROPERTY(BlueprintReadOnly)
+	float m_Speed;
 
 	// Running
-   bool m_isRunning;
+	UPROPERTY(BlueprintReadOnly)
+	bool m_isRunning;
 
-   // Bike
-   bool m_isOnBike;
+	// Bike
+	UPROPERTY(BlueprintReadOnly)
+	bool m_isOnBike;
 	
 };
