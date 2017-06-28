@@ -21,6 +21,8 @@ public:
 
     FString serialize();
 
+
+
 protected:
 	// Name
 	FName m_Name;

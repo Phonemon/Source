@@ -58,6 +58,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void run(float Val);
 
+public:
+	void setMoving(const bool isMoving);
+
 protected:
 	// Monsters
 	UPROPERTY(BlueprintReadOnly)

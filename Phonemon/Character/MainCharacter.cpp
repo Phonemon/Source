@@ -216,6 +216,11 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 }
 
+// Accessor
+void AMainCharacter::setMoving(const bool isMoving) {
+	m_isMoving = isMoving;
+}
+
 // Add a monster to this character
 bool AMainCharacter::addMonster(UMonsterEntity* Monster) {
 	if (m_Monsters.Num() >= MAX_MONSTERS)

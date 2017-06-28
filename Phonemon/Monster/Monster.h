@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "MonsterEntity.h"
 #include "../Experience/Experience.h"
 #include "../Include.h"
 #include "CoreMinimal.h"

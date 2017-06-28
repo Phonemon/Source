@@ -5,7 +5,7 @@
 #pragma once
 
 // Divers
-#define TILE_SIZE 100
+#define TILE_SIZE		100
 
 // Monsters
 #define APPEAR_RATE		PERCENT(10.f)
