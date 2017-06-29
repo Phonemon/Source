@@ -24,13 +24,14 @@ protected:
 	void Overlapp(class UPrimitiveComponent* HitComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Place where the player will be teleportated
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Destination")
+	// Place where the player will be teleported
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Destination", meta = (DisplayName = "Destination"))
 	FVector m_Destination;
 
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void addLoadingScreen();
+	void addLoadingScreen_Implementation();
+		
 private:
 	// Collision
 	UPROPERTY()

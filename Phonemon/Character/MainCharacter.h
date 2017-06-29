@@ -66,6 +66,9 @@ public:
 	UFUNCTION()
 	void setMoving(const bool isMoving);
 
+	UFUNCTION()
+	FTimerHandle& getMovementTimerHandle();
+
 protected:
 	// Monsters
 	UPROPERTY(BlueprintReadOnly)

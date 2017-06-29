@@ -30,9 +30,14 @@ void ATeleporter::Overlapp(class UPrimitiveComponent* HitComp, class AActor* Oth
 
 		// If this is a character
 		if (Character) {
+			addLoadingScreen();
 			Character->SetActorLocation(m_Destination);
 			Character->setMoving(false);
 			Character->setSpeed(0.f);
+			
+			UWorld* World = GetWorld();
+			if (World)
+				World->GetTimerManager().ClearTimer(Character->getMovementTimerHandle());
 		}
 	}
 }
@@ -42,9 +47,8 @@ void ATeleporter::BeginPlay() {
 	Super::BeginPlay();
 }
 
-// Called every frame
-void ATeleporter::Tick(float DeltaTime) {
-	Super::Tick(DeltaTime);
+
+void ATeleporter::addLoadingScreen_Implementation() {
 
 }
 
