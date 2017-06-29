@@ -5,7 +5,7 @@
 
 // Sets default values
 ATeleporter::ATeleporter() {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.
 	PrimaryActorTick.bCanEverTick = false;
 
 	// Create collision
@@ -32,6 +32,7 @@ void ATeleporter::Overlapp(class UPrimitiveComponent* HitComp, class AActor* Oth
 		if (Character) {
 			Character->SetActorLocation(m_Destination);
 			Character->setMoving(false);
+			Character->setSpeed(0.f);
 		}
 	}
 }
@@ -39,7 +40,6 @@ void ATeleporter::Overlapp(class UPrimitiveComponent* HitComp, class AActor* Oth
 // Called when the game starts or when spawned
 void ATeleporter::BeginPlay() {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame

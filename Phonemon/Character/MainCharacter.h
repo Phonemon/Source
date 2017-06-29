@@ -58,7 +58,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void run(float Val);
 
+	UFUNCTION()
+	void setSpeed(const float Speed);
+
 public:
+	UFUNCTION()
 	void setMoving(const bool isMoving);
 
 protected:
@@ -69,10 +73,16 @@ protected:
 	// Movement
 	UPROPERTY(BlueprintReadOnly)
 	bool m_isMoving;
+	UPROPERTY()
 	FVector m_NextLocation;
+	UPROPERTY()
 	FTimerHandle m_MovementTimer;
 	UPROPERTY(BlueprintReadOnly)
 	float m_Speed;
+
+	// Action
+	UPROPERTY(BlueprintReadOnly)
+	bool m_isInteract;
 
 	// Running
 	UPROPERTY(BlueprintReadOnly)

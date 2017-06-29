@@ -14,6 +14,7 @@ AMainCharacter::AMainCharacter() {
 	m_isRunning = false;
 	m_isOnBike = false;
 	m_isMoving = false;
+	m_isInteract = false;
 
 	
 }
@@ -124,8 +125,7 @@ void AMainCharacter::equipBike(){
 
 // Run / not run
 void AMainCharacter::run(float Val) {
-	if (Val <= 0.9f)
-		m_isRunning = Val >= .9f;
+	m_isRunning = (Val >= .9f);
 }
 
 // Move forward - backward
@@ -228,4 +228,8 @@ bool AMainCharacter::addMonster(UMonsterEntity* Monster) {
 
 	m_Monsters.Add(Monster);
 	return true;	
+}
+
+void AMainCharacter::setSpeed(const float Speed) {
+	m_Speed = Speed;
 }

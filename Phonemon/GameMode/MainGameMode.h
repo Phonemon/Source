@@ -4,6 +4,7 @@
 
 #include "../Include.h"
 #include "../Character/MainCharacter.h"
+#include "../PlayerController/MainPlayerController.h"
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
 #include "MainGameMode.generated.h"
@@ -13,8 +14,7 @@
  *	Main game mode of the game
  */
 UCLASS()
-class PHONEMON_API AMainGameMode : public AGameModeBase
-{
+class PHONEMON_API AMainGameMode : public AGameModeBase {
 	GENERATED_BODY()
 	
 public:
