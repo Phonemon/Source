@@ -31,7 +31,7 @@ void ATeleporter::Overlapp(class UPrimitiveComponent* HitComp, class AActor* Oth
 		// If this is a character
 		if (Character) {
 			addLoadingScreen();
-			Character->SetActorLocation(m_Destination);
+			Character->SetActorLocation(ULIB_Bp::getMappedPosition(m_Destination));
 			Character->setMoving(false);
 			Character->setSpeed(0.f);
 			
