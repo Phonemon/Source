@@ -252,17 +252,25 @@ void AMainCharacter::setSpeed(const float Speed) {
 
 // Save the game
 void AMainCharacter::saveGame() {
-	if (m_SaveGame)
+	if (m_SaveGame) {
+		// Set data
+		m_SaveGame->PlayerLocation = GetActorLocation();
+		m_SaveGame->PlayerName = m_Name;
+
+		// Flush
 		UGameplayStatics::SaveGameToSlot(m_SaveGame, TEXT("MyGame"), 0);
+	}
 	else
 		DEBUG("CRITICAL SAVING GAME ERROR");
 }
 
 // Load the game
 void AMainCharacter::loadGame() {
+	// Load the save
 	m_SaveGame = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(TEXT("MyGame"), 0));
 	if (m_SaveGame) {
+		// Get data
 		SetActorLocation(m_SaveGame->PlayerLocation);
-		DEBUG_Vector(m_SaveGame->PlayerLocation);
+		m_Name = m_SaveGame->PlayerName;
 	}
 }

@@ -5,5 +5,5 @@
 
 // Add a dialog box
 void AMainPlayerController::addDialog_Implementation(const FString &Text) {
-
+	bShowMouseCursor = true;
 }

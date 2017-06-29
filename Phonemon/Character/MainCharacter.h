@@ -85,6 +85,8 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	bool m_isInteract;
 
+public: // To avoid blueprint issues
+
 	// Running
 	UPROPERTY(BlueprintReadOnly)
 	bool m_isRunning;
@@ -92,13 +94,19 @@ protected:
 	// Bike
 	UPROPERTY(BlueprintReadOnly)
 	bool m_isOnBike;
+
+protected:
+	// Name
+	UPROPERTY()
+	FString m_Name;
 	
-private:
+public:
 
 	// Save the game
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void saveGame();
 
+private:
 	// Load the game
 	UFUNCTION()
 	void loadGame();
