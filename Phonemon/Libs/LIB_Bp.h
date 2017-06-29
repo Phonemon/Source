@@ -23,6 +23,4 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "String")
 	static FString cutString(UPARAM(ref)FString& String, int32 MaxChar);
 
-	UFUNCTION(BlueprintCallable, Category = Save)
-	static void saveName(const FString &Name);
 };

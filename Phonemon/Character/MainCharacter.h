@@ -27,6 +27,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+
 private:
 	UFUNCTION(BlueprintCallable)
 	void MoveForward(float Value);
@@ -92,4 +93,17 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	bool m_isOnBike;
 	
+private:
+
+	// Save the game
+	UFUNCTION()
+	void saveGame();
+
+	// Load the game
+	UFUNCTION()
+	void loadGame();
+
+	// The data saved
+	UPROPERTY()
+	UMainSaveGame* m_SaveGame;
 };

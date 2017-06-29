@@ -43,9 +43,3 @@ FString ULIB_Bp::cutString(UPARAM(ref) FString& String, int32 MaxChar) {
 
 	return resString;
 }
-
-void ULIB_Bp::saveName(const FString &Name) {
-	UMainSaveGame* SaveGameInstance = Cast<UMainSaveGame>(UGameplayStatics::CreateSaveGameObject(UMainSaveGame::StaticClass()));
-	SaveGameInstance->PlayerName = MyPlayerName;
-	UGameplayStatics::SaveGameToSlot(SaveGameInstance, SaveGameInstance->SaveSlotName, SaveGameInstance->UserIndex);
-}

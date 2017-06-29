@@ -14,6 +14,7 @@ class PHONEMON_API UMainSaveGame : public USaveGame {
 	GENERATED_BODY()
 
 public:
+	UMainSaveGame();
 
 	UPROPERTY(VisibleAnywhere, Category = Basic)
 	FString PlayerName;
@@ -23,8 +24,10 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = Basic)
 	uint32 UserIndex;
+
+	UPROPERTY(VisibleAnywhere, Category = Basic)
+	FVector PlayerLocation;
 	
-	
-	
-	
+	UPROPERTY(VisibleAnywhere, Category = Basic)
+	TArray<class UMonsterEntity*> Monsters;
 };

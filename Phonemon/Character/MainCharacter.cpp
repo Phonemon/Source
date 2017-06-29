@@ -16,13 +16,27 @@ AMainCharacter::AMainCharacter() {
 	m_isMoving = false;
 	m_isInteract = false;
 
-	
+
+	// If this was successfully loaded
+	if (m_SaveGame) {
+
+		// We get & assign the data
+		//INFO();
+
+	}
 }
 
 // Called when the game starts or when spawned
 void AMainCharacter::BeginPlay() {
 	Super::BeginPlay();
 
+	if (m_SaveGame) {
+		ACharacter::SetActorLocation(m_SaveGame->PlayerLocation);
+		DEBUG_Vector(m_SaveGame->PlayerLocation);
+	}
+
+	// We load the saved game
+	loadGame();
 }
 
 // Called every frame
@@ -120,7 +134,8 @@ void AMainCharacter::processMovement() {
 
 // Equip / unequip the bike
 void AMainCharacter::equipBike(){
-		m_isOnBike = !m_isOnBike;
+	m_isOnBike = !m_isOnBike;
+	saveGame();
 }
 
 // Run / not run
@@ -232,4 +247,22 @@ bool AMainCharacter::addMonster(UMonsterEntity* Monster) {
 
 void AMainCharacter::setSpeed(const float Speed) {
 	m_Speed = Speed;
+}
+
+
+// Save the game
+void AMainCharacter::saveGame() {
+	if (m_SaveGame)
+		UGameplayStatics::SaveGameToSlot(m_SaveGame, TEXT("MyGame"), 0);
+	else
+		DEBUG("CRITICAL SAVING GAME ERROR");
+}
+
+// Load the game
+void AMainCharacter::loadGame() {
+	m_SaveGame = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(TEXT("MyGame"), 0));
+	if (m_SaveGame) {
+		SetActorLocation(m_SaveGame->PlayerLocation);
+		DEBUG_Vector(m_SaveGame->PlayerLocation);
+	}
 }

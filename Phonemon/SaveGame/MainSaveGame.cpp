@@ -4,7 +4,7 @@
 
 UMainSaveGame::UMainSaveGame() {
 	PlayerName = TEXT("Henry");
-	UserIndex = 1;
+	UserIndex = 0;
 	SaveSlotName = TEXT("Default");
 }
 
