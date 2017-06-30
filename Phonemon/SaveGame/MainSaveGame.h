@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "../Monster/MonsterEntity.h"
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
 #include "MainSaveGame.generated.h"
@@ -28,6 +29,6 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = Basic)
 	FVector PlayerLocation;
 	
-	UPROPERTY(VisibleAnywhere, Category = Basic)
-	TArray<class UMonsterEntity*> Monsters;
+	//UPROPERTY()
+	//TArray<UMonsterEntity> Monsters;
 };

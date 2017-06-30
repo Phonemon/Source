@@ -19,11 +19,7 @@ public:
 	UMonsterEntity();
 	~UMonsterEntity();
 
-    FString serialize();
-
-
-
-protected:
+public:
 	// Name
 	FName m_Name;
 
@@ -39,5 +35,7 @@ protected:
 	int32 m_Agility;
 	int32 m_Cleverness;
 
-	EMonsterType m_Type;
+	//EMonsterType m_Type;
+
+	bool m_isInTeam;
 };

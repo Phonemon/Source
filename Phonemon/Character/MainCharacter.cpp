@@ -255,9 +255,19 @@ void AMainCharacter::loadGame() {
 	// Load the save
 	m_SaveGame = Cast<UMainSaveGame>(UGameplayStatics::LoadGameFromSlot(TEXT("MyGame"), 0));
 	if (m_SaveGame) {
+		// Get data ----
+
+		//Location
 		SetActorLocation(m_SaveGame->PlayerLocation);
-		// Get data
+		// Name
 		m_Name = m_SaveGame->PlayerName;
+		
+		/*// Monsters
+		for (auto& Monster : m_SaveGame->Monsters) {
+			if (Monster.)
+			m_Monsters.Add(&Monster);
+		}*/
+			
 	}
 }
 

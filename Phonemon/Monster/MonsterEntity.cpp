@@ -3,17 +3,9 @@
 #include "MonsterEntity.h"
 
 UMonsterEntity::UMonsterEntity() {
-
+	m_isInTeam = false;
 }
 
 UMonsterEntity::~UMonsterEntity() {
 
-}
-
-// Serialize this monster to string
-FString UMonsterEntity::serialize() {
-    FString ser;
-
-    
-    return ser;
 }
